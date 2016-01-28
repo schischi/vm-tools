@@ -1,0 +1,9 @@
+ARCH=mips
+DARCH=mips
+CROSS=mips-linux-
+CROSS_COMPILE=mips-linux-
+QEMU=qemu-system-mips
+QEMU_STATIC=qemu-mips-static
+QEMU_FLAGS=""
+LINUX_FLAGS="console=ttyS0"
+KERNEL=vmlinux
