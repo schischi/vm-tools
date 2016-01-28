@@ -1,0 +1,9 @@
+ARCH=i386
+DARCH=i386
+CROSS=i386-linux-
+CROSS_COMPILE=i386-linux-
+QEMU=qemu-system-i386
+QEMU_STATIC=qemu-i386-static
+QEMU_FLAGS=""
+LINUX_FLAGS=""
+KERNEL=arch/x86/boot/bzImage

@@ -1,0 +1,9 @@
+ARCH=x86_64
+DARCH=amd64
+CROSS=x86_64-linux-
+CROSS_COMPILE=x86_64-linux-
+QEMU=qemu-system-x86_64
+QEMU_STATIC=qemu-x86_64-static
+QEMU_FLAGS=""
+LINUX_FLAGS=""
+KERNEL=arch/x86/boot/bzImage
