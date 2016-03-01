@@ -27,11 +27,11 @@ $BINUTILS_SRC/configure --target=$TARGET --prefix=$PREFIX \
 make $MAKEOPTS
 make install
 
+#--enable-sjlj-exceptions --with-system-libunwind \
 cd $BUILD_DIR/gcc
 $GCC_SRC/configure \
         --target=$TARGET --enable-targets=all --prefix=$PREFIX \
 	--enable-languages=c --without-headers --disable-bootstrap \
-	--enable-sjlj-exceptions --with-system-libunwind \
 	--disable-nls --disable-threads --disable-shared \
 	--disable-libmudflap --disable-libssp --disable-libgomp \
 	--disable-decimal-float --disable-libquadmath \

@@ -16,6 +16,9 @@ aarch64: binutils gcc
 mips: binutils gcc
 	./bld.sh mips mips-linux
 
+powerpc:
+	./bld.sh powerpc powerpc-linux
+
 clean:
 	rm -rf build
 

@@ -1,0 +1,9 @@
+ARCH=powerpc
+DARCH=powerpc
+CROSS=powerpc
+CROSS_COMPILE=powerpc-linux-
+QEMU=qemu-system-ppc
+QEMU_STATIC=qemu-ppc-static
+QEMU_FLAGS=""
+LINUX_FLAGS="console=ttyPZ0"
+KERNEL=vmlinux
