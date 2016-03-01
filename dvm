@@ -1,0 +1,67 @@
+#! /usr/bin/env python3
+
+import os
+import sys
+import shutil
+import getopt
+import argparse
+from subprocess import Popen, PIPE
+
+# TODO:
+#   -kernel PATH
+#   -debug
+
+base_dir = os.path.dirname(os.path.realpath(__file__)) + "/"
+commands = ["build", "update", "boot", "chroot", "exec"]
+archs = [name for name in os.listdir(base_dir + "vm")
+            if os.path.isdir(os.path.join(base_dir + "vm", name))]
+kernels = ['next']
+
+parser = argparse.ArgumentParser(description='vm')
+parser.add_argument('cmd', choices=commands, action="store")
+parser.add_argument('arch', choices=archs + ["all"], action="store")
+#parser.add_argument('kernel', choices=kernels, action="store", default='next', nargs='?')
+parser.add_argument('kernel', action="store", default='next', nargs='?')
+parser.add_argument('--debug', dest='debug', action='store_const', const="-s -S", default="")
+args = parser.parse_args()
+
+class col:
+    blue   = '\033[94m'
+    green  = '\033[92m'
+    orange = '\033[93m'
+    red    = '\033[91m'
+    reset  = '\033[0m'
+
+if __name__ == "__main__":
+    if args.cmd == "build":
+        if args.arch == "all":
+            for arch in archs:
+                os.system(base_dir + "vm/kernel.sh " + arch + " " + args.kernel)
+        else:
+            os.system(base_dir + "vm/kernel.sh " + args.arch + " " + args.kernel)
+
+    elif args.cmd == "boot":
+        if args.arch == "all":
+            exit(1)
+        else:
+            os.system(base_dir + "vm/qemu.sh " + args.arch + " " + args.kernel + " \"" + args.debug + "\"")
+
+    elif args.cmd == "chroot":
+        if args.arch == "all":
+            exit(1)
+        else:
+            os.system("sudo chroot " + base_dir + "vm/" + args.arch + "/rootfs")
+
+    elif args.cmd == "update":
+        if args.arch == "all":
+            for arch in archs:
+                os.system("sudo chroot " + base_dir + "vm/" + arch + "/rootfs" + " sh -c 'apt-get update && apt-get upgrade'")
+        else:
+            os.system("sudo chroot " + base_dir + "vm/" + args.arch + "/rootfs" + " sh -c 'apt-get update && apt-get upgrade'")
+
+    elif args.cmd == "exec":
+        if args.arch == "all":
+            for arch in archs:
+                os.system("sudo chroot " + base_dir + "vm/" + arch + "/rootfs " +args. kernel)
+        else:
+            os.system("sudo chroot " + base_dir + "vm/" + args.arch + "/rootfs " + args.kernel)
