@@ -1,9 +1,9 @@
 ARCH=i386
 DARCH=i386
-CROSS=i386-linux-
+CROSS=i386
 CROSS_COMPILE=i386-linux-
 QEMU=qemu-system-i386
 QEMU_STATIC=qemu-i386-static
-QEMU_FLAGS=""
-LINUX_FLAGS=""
+QEMU_FLAGS="-enable-kvm"
+LINUX_FLAGS="console=ttyS0"
 KERNEL=arch/x86/boot/bzImage
